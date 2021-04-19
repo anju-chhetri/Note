@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QCloseEvent>
 #include <QMenuBar>
+#include <QFontDialog>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -19,15 +20,29 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCentralWidget(ui->window_write);
     connect(ui->window_write,SIGNAL(textChanged()),this, SLOT(text_color_changed()));
     set_shortcut_key();
-    QTextStream out(stdout);
-    out<<"test";
+    QString data_path="/Note_data.txt";
     setWindowIcon(QIcon(":/image/images (3).jpg"));
-   // ui->menubar->set
+    QFile font_read(QDir::currentPath()+data_path);
+    if(!font_read.open(QFile::ReadOnly | QFile::Text)){
+        QMessageBox::warning(this," Error! ","Error loading the previous font"); }
+    QTextStream file(&font_read);
+    QString data_read=file.readAll();
+    QFont font=QFont(data_read);
+    font.setPointSize(9);
+    ui->window_write->setFont(font);
+    font_read.close();
+    QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+void MainWindow::call_increase_count()
+{
+store_count=1;
+
 }
 
 void MainWindow::setbackground()
@@ -36,6 +51,9 @@ ui->window_write->setStyleSheet("background-image: url(:/image/back.jpg)");
 ui->window_write->setTextColor(QColor("white"));
 }
 
+void MainWindow::read_font(){
+    QFile font_read(":/image/Note_data.txt");
+}
 void MainWindow::set_shortcut_key()
 {
     QShortcut *for_cut=new QShortcut(QKeySequence("ctrl+shift+x"),this);
@@ -48,8 +66,8 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_undo, SIGNAL(activated()),this,SLOT(undo_text()));
     QShortcut *for_redo=new QShortcut(QKeySequence("ctrl+r"), this);
     QObject::connect(for_redo, SIGNAL(activated()),this,SLOT(redo_text()));
-    QShortcut *for_find=new QShortcut(QKeySequence("ctrl+f"), this);
-    QObject::connect(for_find, SIGNAL(activated()),this,SLOT(find_text()));
+   // QShortcut *for_find=new QShortcut(QKeySequence("ctrl+f"), this);
+    //QObject::connect(for_find, SIGNAL(activated()),this,SLOT(find_text()));
     QShortcut *for_open=new QShortcut(QKeySequence("ctrl+o"),this);
     QObject::connect(for_open,SIGNAL(activated()),this,SLOT(check_open()));
     QShortcut *for_save=new QShortcut(QKeySequence("ctrl+s"),this);
@@ -58,6 +76,8 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_save_as,SIGNAL(activated()),this,SLOT(check_save_as()));
     QShortcut *for_new=new QShortcut(QKeySequence("ctrl+shift+n"),this);
     QObject::connect(for_new,SIGNAL(activated()),this,SLOT(new_file()));
+    QShortcut *for_font_change= new QShortcut(QKeySequence("ctrl+f"),this);
+    QObject::connect(for_font_change,SIGNAL(activated()),this,SLOT(change_font()));
 }
 
 
@@ -131,6 +151,7 @@ void MainWindow::open_file(QString file_name)
     QString text_read= input.readAll();
     ui->window_write->setText(text_read);
     file.close();
+    store_count=0;
 }
 void MainWindow::save_file()
 {
@@ -143,8 +164,9 @@ void MainWindow::save_file()
         return;
     }
     statusBar()->showMessage("file saved.",2000);
-    QTextStream output(&file);
+    store_count=0;
     QString text_write=ui->window_write->toPlainText();
+    QTextStream output(&file);
     output<<text_write;
     file.flush();
     file.close();
@@ -155,6 +177,7 @@ void MainWindow::check_save_as()
 {
      statusBar()->showMessage("Save file as",2000);
      QString file_name=QFileDialog::getSaveFileName(this,"save file as");
+     file_path=file_name;
      if(!file_name.isEmpty()){
          save_as_file(file_name);
      }
@@ -172,10 +195,11 @@ void MainWindow::save_as_file(QString file_name)
     output<<text_write;
     file.flush();
     file.close();
+    store_count=0;
 }
 
 void MainWindow::closeEvent(QCloseEvent *close)
-{
+{   if(store_count==1){
     if (file_path!=""){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
     if (button==QMessageBox::Yes){close->accept();}
@@ -184,13 +208,39 @@ void MainWindow::closeEvent(QCloseEvent *close)
 
     }
     else{ close->ignore();}
-}}
+}}}
 void MainWindow::new_file()
 {
      statusBar()->showMessage("Opening new file.",1000);
     ui->window_write->setText("");
     file_path="";
 }
+
+void MainWindow::change_font()
+{
+    bool to_check;
+    QFont set_font= QFontDialog::getFont(&to_check,this);
+    if(to_check){
+        ui->window_write->setFont(set_font);
+        QString font_name=set_font.family();
+        QString data_path="/Note_data.txt";
+      // QTextStream out(stdout);
+       //out<<font_name;
+
+        QFile font_read(QDir::currentPath()+data_path);
+        if(!font_read.open(QFile::WriteOnly|QFile::Text)){
+            QMessageBox::warning(this," Error! ","Error writing the font"); }
+        QTextStream output(&font_read);
+        output<<font_name;
+        font_read.flush();
+        font_read.close();
+        }
+
+    else
+        return;
+}
+
+int MainWindow::store_count=0;
 
 //void MainWindow::undo_available(bool available)
 //{

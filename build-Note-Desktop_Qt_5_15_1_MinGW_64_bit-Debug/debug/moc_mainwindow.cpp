@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[13];
-    char stringdata0[135];
+    QByteArrayData data[15];
+    char stringdata0[167];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,13 +44,16 @@ QT_MOC_LITERAL(8, 81, 9), // "undo_text"
 QT_MOC_LITERAL(9, 91, 9), // "save_file"
 QT_MOC_LITERAL(10, 101, 13), // "check_save_as"
 QT_MOC_LITERAL(11, 115, 10), // "check_open"
-QT_MOC_LITERAL(12, 126, 8) // "new_file"
+QT_MOC_LITERAL(12, 126, 8), // "new_file"
+QT_MOC_LITERAL(13, 135, 11), // "change_font"
+QT_MOC_LITERAL(14, 147, 19) // "call_increase_count"
 
     },
     "MainWindow\0text_color_changed\0\0find_text\0"
     "copy_text\0cut_text\0paste_text\0redo_text\0"
     "undo_text\0save_file\0check_save_as\0"
-    "check_open\0new_file"
+    "check_open\0new_file\0change_font\0"
+    "call_increase_count"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +63,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,19 +71,23 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x0a /* Public */,
-       3,    0,   70,    2, 0x0a /* Public */,
-       4,    0,   71,    2, 0x0a /* Public */,
-       5,    0,   72,    2, 0x0a /* Public */,
-       6,    0,   73,    2, 0x0a /* Public */,
-       7,    0,   74,    2, 0x0a /* Public */,
-       8,    0,   75,    2, 0x0a /* Public */,
-       9,    0,   76,    2, 0x0a /* Public */,
-      10,    0,   77,    2, 0x0a /* Public */,
-      11,    0,   78,    2, 0x0a /* Public */,
-      12,    0,   79,    2, 0x0a /* Public */,
+       1,    0,   79,    2, 0x0a /* Public */,
+       3,    0,   80,    2, 0x0a /* Public */,
+       4,    0,   81,    2, 0x0a /* Public */,
+       5,    0,   82,    2, 0x0a /* Public */,
+       6,    0,   83,    2, 0x0a /* Public */,
+       7,    0,   84,    2, 0x0a /* Public */,
+       8,    0,   85,    2, 0x0a /* Public */,
+       9,    0,   86,    2, 0x0a /* Public */,
+      10,    0,   87,    2, 0x0a /* Public */,
+      11,    0,   88,    2, 0x0a /* Public */,
+      12,    0,   89,    2, 0x0a /* Public */,
+      13,    0,   90,    2, 0x0a /* Public */,
+      14,    0,   91,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -113,6 +120,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->check_save_as(); break;
         case 9: _t->check_open(); break;
         case 10: _t->new_file(); break;
+        case 11: _t->change_font(); break;
+        case 12: _t->call_increase_count(); break;
         default: ;
         }
     }
@@ -148,13 +157,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }

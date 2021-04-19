@@ -16,9 +16,6 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QComboBox" name="comboBox"/>
-    </item>
-    <item>
      <widget class="QTextEdit" name="window_write"/>
     </item>
    </layout>

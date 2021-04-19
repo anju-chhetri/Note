@@ -15,12 +15,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
+    void read_font();
     void setbackground();
     void set_shortcut_key();
     void open_file(QString file_name);
     void save_as_file(QString file_name);
     void closeEvent(QCloseEvent *close );
     QString file_path;
+    static int store_count;
 public slots:
     void text_color_changed();
     void find_text();
@@ -33,6 +35,8 @@ public slots:
     void check_save_as();
     void check_open();
     void new_file();
+    void change_font();
+    void call_increase_count();
 private:
     Ui::MainWindow *ui;
 

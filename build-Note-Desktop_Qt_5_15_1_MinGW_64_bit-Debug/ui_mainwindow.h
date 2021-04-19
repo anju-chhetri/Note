@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -26,7 +25,6 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
-    QComboBox *comboBox;
     QTextEdit *window_write;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -40,11 +38,6 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        comboBox = new QComboBox(centralwidget);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-
-        horizontalLayout->addWidget(comboBox);
-
         window_write = new QTextEdit(centralwidget);
         window_write->setObjectName(QString::fromUtf8("window_write"));
 

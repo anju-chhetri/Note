@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++11 -Wall -Wextra -Wextra
 INCPATH       = -I..\Note -I. -IC:\Qt\5.15.1\mingw81_64\include -IC:\Qt\5.15.1\mingw81_64\include\QtWidgets -IC:\Qt\5.15.1\mingw81_64\include\QtGui -IC:\Qt\5.15.1\mingw81_64\include\QtANGLE -IC:\Qt\5.15.1\mingw81_64\include\QtCore -Idebug -I. -I/include -IC:\Qt\5.15.1\mingw81_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\5.15.1\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.1\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.1\mingw81_64\lib\libQt5Core.a  -lmingw32 C:\Qt\5.15.1\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        C:\Qt\5.15.1\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.1\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.1\mingw81_64\lib\libQt5Core.a debug\Note_resource_res.o  -lmingw32 C:\Qt\5.15.1\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = C:\Qt\5.15.1\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\Note_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -70,8 +70,11 @@ DESTDIR_TARGET = debug\Note.exe
 first: all
 all: Makefile.Debug  debug/Note.exe
 
-debug/Note.exe: C:/Qt/5.15.1/mingw81_64/lib/libQt5Widgets.a C:/Qt/5.15.1/mingw81_64/lib/libQt5Gui.a C:/Qt/5.15.1/mingw81_64/lib/libQt5Core.a C:/Qt/5.15.1/mingw81_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) 
+debug/Note.exe: C:/Qt/5.15.1/mingw81_64/lib/libQt5Widgets.a C:/Qt/5.15.1/mingw81_64/lib/libQt5Gui.a C:/Qt/5.15.1/mingw81_64/lib/libQt5Core.a C:/Qt/5.15.1/mingw81_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) debug/Note_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+debug/Note_resource_res.o: Note_resource.rc
+	windres -i Note_resource.rc -o debug\Note_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\Note\Note.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -83,6 +86,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\qrc_note.o debug\moc_mainwindow.o
+	-$(DEL_FILE) debug\Note_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -105,9 +109,6 @@ compiler_rcc_clean:
 debug/qrc_note.cpp: ../Note/note.qrc \
 		C:/Qt/5.15.1/mingw81_64/bin/rcc.exe \
 		../Note/back.jpg \
-		../Note/images\ (2).jpg \
-		../Note/images\ (1).jpg \
-		../Note/images(0).png \
 		../Note/images\ (3).jpg
 	C:\Qt\5.15.1\mingw81_64\bin\rcc.exe -name note ..\Note\note.qrc -o debug\qrc_note.cpp
 

@@ -2,8 +2,5 @@
     <qresource prefix="/image">
         <file>back.jpg</file>
         <file>images (3).jpg</file>
-        <file>images(0).png</file>
-        <file>images (2).jpg</file>
-        <file>images (1).jpg</file>
     </qresource>
 </RCC>

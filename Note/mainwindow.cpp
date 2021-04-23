@@ -9,6 +9,7 @@
 #include <QCloseEvent>
 #include <QMenuBar>
 #include <QFontDialog>
+#include <QDirIterator>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -20,20 +21,29 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCentralWidget(ui->window_write);
     connect(ui->window_write,SIGNAL(textChanged()),this, SLOT(text_color_changed()));
     set_shortcut_key();
-    QString data_path="/Note_data.txt";
     setWindowIcon(QIcon(":/image/images (3).jpg"));
-    QFile font_read(QDir::currentPath()+data_path);
-    if(!font_read.open(QFile::ReadOnly | QFile::Text)){
-        QMessageBox::warning(this," Error! ","Error loading the previous font"); }
-    QTextStream file(&font_read);
-    QString data_read=file.readAll();
+
+    QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
+    int i=0;
+    QFile file(QDir::homePath()+"/Note_data.txt");
+    if(!file.open(QFile::WriteOnly |QFile::ReadOnly | QFile::Text)){
+     QMessageBox::warning(this,"Error","Required file cannot be created");
+    }
+    QTextStream output(&file);
+    QDirIterator an(QDir::homePath());
+    while(an.hasNext()){
+            if(an.next()==(QDir::homePath()+"/Note_data.txt")){i=1;break;}
+    }
+    if(i==0){
+        output<<"";
+        file.flush();
+    }
+    QString data_read=output.readAll();
     QFont font=QFont(data_read);
     font.setPointSize(9);
     ui->window_write->setFont(font);
-    font_read.close();
-    QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
-
-}
+    file.close();
+ }
 
 MainWindow::~MainWindow()
 {
@@ -227,7 +237,7 @@ void MainWindow::change_font()
       // QTextStream out(stdout);
        //out<<font_name;
 
-        QFile font_read(QDir::currentPath()+data_path);
+        QFile font_read(QDir::homePath()+data_path);
         if(!font_read.open(QFile::WriteOnly|QFile::Text)){
             QMessageBox::warning(this," Error! ","Error writing the font"); }
         QTextStream output(&font_read);

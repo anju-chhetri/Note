@@ -1,3 +1,4 @@
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QShortcut>
@@ -40,20 +41,33 @@ MainWindow::MainWindow(QWidget *parent)
     }
     QString data_read=output.readAll();
     QFont font=QFont(data_read);
-    font.setPointSize(9);
+    font.setPointSize(10);
     ui->window_write->setFont(font);
     file.close();
+    for_ReadMe_File();
  }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::call_increase_count()
-{
-store_count=1;
-
-}
+void MainWindow::call_increase_count(){store_count=1;}
+void MainWindow::for_ReadMe_File(){
+    int i=0;
+    QDirIterator ite(QDir::homePath());
+    while(ite.hasNext()){
+        if(ite.next()==(QDir::homePath()+"/README_Note.txt")){i=1;break;}
+    }
+    if(i==0){
+        QFile file(QDir::homePath()+"/README_Note.txt");
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
+            QMessageBox::warning(this,"Error","Error creating README file.");
+                    }
+        QTextStream display(&file);
+        display<<"ShortCut key used in Note: \n\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file\nCtrl+u = Undo \nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file\nCtrl+f = Open Font dialog box\nCtrl+d = Display README.txt file\n";
+        file.flush();
+        file.close();
+    }}
 
 void MainWindow::setbackground()
 {
@@ -61,9 +75,6 @@ ui->window_write->setStyleSheet("background-image: url(:/image/back.jpg)");
 ui->window_write->setTextColor(QColor("white"));
 }
 
-void MainWindow::read_font(){
-    QFile font_read(":/image/Note_data.txt");
-}
 void MainWindow::set_shortcut_key()
 {
     QShortcut *for_cut=new QShortcut(QKeySequence("ctrl+shift+x"),this);
@@ -88,6 +99,8 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_new,SIGNAL(activated()),this,SLOT(new_file()));
     QShortcut *for_font_change= new QShortcut(QKeySequence("ctrl+f"),this);
     QObject::connect(for_font_change,SIGNAL(activated()),this,SLOT(change_font()));
+    QShortcut *for_README = new QShortcut(QKeySequence("ctrl+d"),this);
+    QObject::connect(for_README,SIGNAL(activated()),this,SLOT(README()));
 }
 
 
@@ -132,7 +145,6 @@ void MainWindow::undo_text()
 {
      statusBar()->showMessage("Undo.",1000);
     ui->window_write->undo();
-    //QObject::connect(ui->window_write,SIGNAL(undoAvailable(bool)),ui->window_write,SLOT(undo_available(bool)));
 
 }
 
@@ -145,8 +157,6 @@ void MainWindow::check_open()
     if(!file_name.isEmpty()){
        open_file(file_name);
     }
-//    QTextStream out(stdout);
-//    out<<file_name;
 }
 
 void MainWindow::open_file(QString file_name)
@@ -208,17 +218,6 @@ void MainWindow::save_as_file(QString file_name)
     store_count=0;
 }
 
-void MainWindow::closeEvent(QCloseEvent *close)
-{   if(store_count==1){
-    if (file_path!=""){
-    QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
-    if (button==QMessageBox::Yes){close->accept();}
-    else if(button==QMessageBox::Save){
-        save_file();
-
-    }
-    else{ close->ignore();}
-}}}
 void MainWindow::new_file()
 {
      statusBar()->showMessage("Opening new file.",1000);
@@ -250,19 +249,30 @@ void MainWindow::change_font()
         return;
 }
 
+void MainWindow::README(){
+    file_path=QDir::homePath()+"/README_Note.txt";
+    open_file(file_path);
+//    QFile file(QDir::homePath()+"/README_Note.txt");
+//    if(!file.open(QFile::ReadOnly | QFile::Text)){
+//        QMessageBox::warning(this,"Error!","Error opening the file.");
+//        return;
+//    }
+//    QTextStream out(&file);
+//    QString data=out.readAll();
+//    ui->window_write->setText(data);
+//    file.close();
+}
+
+void MainWindow::closeEvent(QCloseEvent *close)
+{   if(store_count==1){
+    if (file_path!=""){
+    QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
+    if (button==QMessageBox::Yes){close->accept();}
+    else if(button==QMessageBox::Save){
+        save_file();
+
+    }
+    else{ close->ignore();}
+}}}
 int MainWindow::store_count=0;
-
-//void MainWindow::undo_available(bool available)
-//{
-//    if(available){
-//        ui->window_write->undo();
-//    }
-//}
-
-//void MainWindow::redo_available(bool available)
-//{
-//    if(available){
-//        ui->window_write->redo();
-//    }
-//}
 

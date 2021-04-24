@@ -15,15 +15,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
-    void read_font();
     void setbackground();
     void set_shortcut_key();
     void open_file(QString file_name);
     void save_as_file(QString file_name);
     void closeEvent(QCloseEvent *close );
+    void for_ReadMe_File();
     QString file_path;
     static int store_count;
 public slots:
+    void README();
     void text_color_changed();
     void find_text();
     void copy_text();

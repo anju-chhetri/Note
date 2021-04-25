@@ -45,13 +45,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->window_write->setFont(font);
     file.close();
     for_ReadMe_File();
+
  }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::call_increase_count(){store_count=1;}
+
+void MainWindow::call_increase_count(){
+    store_count=1;
+    if (file_path==""){ setWindowTitle("Untitled file");}
+    else{   setWindowTitle("*"+QFileInfo(file_path).fileName());}
+            }
 void MainWindow::for_ReadMe_File(){
     int i=0;
     QDirIterator ite(QDir::homePath());
@@ -167,9 +173,11 @@ void MainWindow::open_file(QString file_name)
         QMessageBox::warning(this,"Warning","Error opening the file.");
         return;
     }
+
     QTextStream input(&file);
     QString text_read= input.readAll();
     ui->window_write->setText(text_read);
+    this->setWindowTitle(QFileInfo(file_name).fileName());
     file.close();
     store_count=0;
 }
@@ -190,6 +198,7 @@ void MainWindow::save_file()
     output<<text_write;
     file.flush();
     file.close();
+    this->setWindowTitle(QFileInfo(file_path).fileName());
     break;
 }}
 
@@ -199,24 +208,10 @@ void MainWindow::check_save_as()
      QString file_name=QFileDialog::getSaveFileName(this,"save file as");
      file_path=file_name;
      if(!file_name.isEmpty()){
-         save_as_file(file_name);
+         save_file();
      }
 }
 
-void MainWindow::save_as_file(QString file_name)
-{
-    QFile file(file_name);
-    if(!file.open(QFile::WriteOnly | QFile::Text)){
-        QMessageBox::warning(this,"Warning","Error saving the file.");
-        return;
-    }
-    QTextStream output(&file);
-    QString text_write=ui->window_write->toPlainText();
-    output<<text_write;
-    file.flush();
-    file.close();
-    store_count=0;
-}
 
 void MainWindow::new_file()
 {

@@ -18,7 +18,6 @@ private:
     void setbackground();
     void set_shortcut_key();
     void open_file(QString file_name);
-    void save_as_file(QString file_name);
     void closeEvent(QCloseEvent *close );
     void for_ReadMe_File();
     QString file_path;

@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->window_write->setFont(font);
     file.close();
     for_ReadMe_File();
-
  }
 
 MainWindow::~MainWindow()
@@ -55,7 +54,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::call_increase_count(){
     store_count=1;
-    if (file_path==""){ setWindowTitle("Untitled file");}
+    if (file_path==""){
+        setWindowTitle("Untitled file");
+    }
     else{   setWindowTitle("*"+QFileInfo(file_path).fileName());}
             }
 void MainWindow::for_ReadMe_File(){
@@ -107,7 +108,9 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_font_change,SIGNAL(activated()),this,SLOT(change_font()));
     QShortcut *for_README = new QShortcut(QKeySequence("ctrl+d"),this);
     QObject::connect(for_README,SIGNAL(activated()),this,SLOT(README()));
-}
+    QShortcut *for_about=new QShortcut(QKeySequence("ctrl+i"),this);
+    QObject::connect(for_about,SIGNAL(activated()),this,SLOT(about()));
+    }
 
 
 void MainWindow::text_color_changed()
@@ -191,14 +194,15 @@ void MainWindow::save_file()
         QMessageBox::warning(this,"Warning","Error saving the file.");
         return;
     }
-    statusBar()->showMessage("file saved.",2000);
-    store_count=0;
+
     QString text_write=ui->window_write->toPlainText();
     QTextStream output(&file);
     output<<text_write;
     file.flush();
     file.close();
+    statusBar()->showMessage("file saved.",2000);
     this->setWindowTitle(QFileInfo(file_path).fileName());
+    store_count=0;
     break;
 }}
 
@@ -215,10 +219,27 @@ void MainWindow::check_save_as()
 
 void MainWindow::new_file()
 {
-     statusBar()->showMessage("Opening new file.",1000);
+    QMessageBox::StandardButton ask;
+    if(store_count==1){
+         ask= QMessageBox::question(this,"Open New file?","Some changes are to be saved.\n Open anyway?",QMessageBox::Yes|QMessageBox::No|QMessageBox::Save);
+         if(ask==QMessageBox::Yes){open_new_file();}
+         if(ask==QMessageBox::No){return;}
+         if(ask==QMessageBox::Save){
+             save_file();
+             open_new_file();
+         }
+
+    }
+    else if(store_count==0){open_new_file();}
+
+
+}
+void MainWindow::open_new_file(){
+    statusBar()->showMessage("Opening new file.",1000);
     ui->window_write->setText("");
     file_path="";
-}
+    this->setWindowTitle("New file");
+        }
 
 void MainWindow::change_font()
 {
@@ -228,8 +249,6 @@ void MainWindow::change_font()
         ui->window_write->setFont(set_font);
         QString font_name=set_font.family();
         QString data_path="/Note_data.txt";
-      // QTextStream out(stdout);
-       //out<<font_name;
 
         QFile font_read(QDir::homePath()+data_path);
         if(!font_read.open(QFile::WriteOnly|QFile::Text)){
@@ -247,20 +266,12 @@ void MainWindow::change_font()
 void MainWindow::README(){
     file_path=QDir::homePath()+"/README_Note.txt";
     open_file(file_path);
-//    QFile file(QDir::homePath()+"/README_Note.txt");
-//    if(!file.open(QFile::ReadOnly | QFile::Text)){
-//        QMessageBox::warning(this,"Error!","Error opening the file.");
-//        return;
-//    }
-//    QTextStream out(&file);
-//    QString data=out.readAll();
-//    ui->window_write->setText(data);
-//    file.close();
+
 }
+void MainWindow::about(){QMessageBox::information(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
 
 void MainWindow::closeEvent(QCloseEvent *close)
 {   if(store_count==1){
-    if (file_path!=""){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
     if (button==QMessageBox::Yes){close->accept();}
     else if(button==QMessageBox::Save){
@@ -268,6 +279,6 @@ void MainWindow::closeEvent(QCloseEvent *close)
 
     }
     else{ close->ignore();}
-}}}
+}}
 int MainWindow::store_count=0;
 

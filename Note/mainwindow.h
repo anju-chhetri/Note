@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QMessageBox>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,6 +15,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
+
+    void open_new_file();
     void setbackground();
     void set_shortcut_key();
     void open_file(QString file_name);
@@ -23,6 +25,7 @@ private:
     QString file_path;
     static int store_count;
 public slots:
+    void about();
     void README();
     void text_color_changed();
     void find_text();

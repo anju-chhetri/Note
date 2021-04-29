@@ -1,4 +1,3 @@
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QShortcut>
@@ -45,6 +44,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->window_write->setFont(font);
     file.close();
     for_ReadMe_File();
+ //   QTextStream cout(stdout);
+    this->setGeometry(500,150,900,800);
+
  }
 
 MainWindow::~MainWindow()
@@ -110,6 +112,8 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_README,SIGNAL(activated()),this,SLOT(README()));
     QShortcut *for_about=new QShortcut(QKeySequence("ctrl+i"),this);
     QObject::connect(for_about,SIGNAL(activated()),this,SLOT(about()));
+    QShortcut *for_close =new QShortcut(QKeySequence("ctrl+w"),this);
+    QObject::connect(for_close,SIGNAL(activated()),this,SLOT(close_application()));
     }
 
 
@@ -226,6 +230,7 @@ void MainWindow::new_file()
          if(ask==QMessageBox::No){return;}
          if(ask==QMessageBox::Save){
              save_file();
+             if(file_path==""){return;}
              open_new_file();
          }
 
@@ -239,6 +244,7 @@ void MainWindow::open_new_file(){
     ui->window_write->setText("");
     file_path="";
     this->setWindowTitle("New file");
+    store_count=0;
         }
 
 void MainWindow::change_font()
@@ -269,16 +275,18 @@ void MainWindow::README(){
 
 }
 void MainWindow::about(){QMessageBox::information(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
-
+void MainWindow::close_application(){QApplication::closeAllWindows();}
 void MainWindow::closeEvent(QCloseEvent *close)
 {   if(store_count==1){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
     if (button==QMessageBox::Yes){close->accept();}
     else if(button==QMessageBox::Save){
         save_file();
+        if(file_path==""){close->ignore();}
 
     }
     else{ close->ignore();}
 }}
 int MainWindow::store_count=0;
+
 

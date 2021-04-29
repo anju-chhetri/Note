@@ -15,7 +15,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
-
     void open_new_file();
     void setbackground();
     void set_shortcut_key();
@@ -25,6 +24,7 @@ private:
     QString file_path;
     static int store_count;
 public slots:
+    void close_application();
     void about();
     void README();
     void text_color_changed();

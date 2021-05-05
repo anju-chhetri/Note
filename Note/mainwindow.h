@@ -22,8 +22,13 @@ private:
     void closeEvent(QCloseEvent *close );
     void for_ReadMe_File();
     QString file_path;
+    QString before_text;
     static int store_count;
 public slots:
+    void return_richText();
+    void MarkDown();
+    void HTML();
+    void plainText();
     void close_application();
     void about();
     void README();

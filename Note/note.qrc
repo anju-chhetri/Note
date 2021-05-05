@@ -2,5 +2,9 @@
     <qresource prefix="/image">
         <file>back.jpg</file>
         <file>images (3).jpg</file>
+        <file>blue.png</file>
+        <file>semi-white.jpg</file>
+        <file>yellow.jpg</file>
+        <file>yellow1.png</file>
     </qresource>
 </RCC>

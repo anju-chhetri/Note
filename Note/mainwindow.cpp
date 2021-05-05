@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     file_path="";
     this->setWindowTitle("NOTE");
     this->setCentralWidget(ui->window_write);
-    connect(ui->window_write,SIGNAL(textChanged()),this, SLOT(text_color_changed()));
+    //connect(ui->window_write,SIGNAL(textChanged()),this, SLOT(text_color_changed()));
     set_shortcut_key();
     setWindowIcon(QIcon(":/image/images (3).jpg"));
 
@@ -80,8 +80,8 @@ void MainWindow::for_ReadMe_File(){
 
 void MainWindow::setbackground()
 {
-ui->window_write->setStyleSheet("background-image: url(:/image/back.jpg)");
-ui->window_write->setTextColor(QColor("white"));
+ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png)");
+//ui->window_write->setTextColor(QColor("white"));
 }
 
 void MainWindow::set_shortcut_key()
@@ -114,7 +114,15 @@ void MainWindow::set_shortcut_key()
     QObject::connect(for_about,SIGNAL(activated()),this,SLOT(about()));
     QShortcut *for_close =new QShortcut(QKeySequence("ctrl+w"),this);
     QObject::connect(for_close,SIGNAL(activated()),this,SLOT(close_application()));
-    }
+    QShortcut *for_markdown = new QShortcut(QKeySequence("ctrl+m"),this);
+    QObject::connect(for_markdown,SIGNAL(activated()),this,SLOT(MarkDown()));
+    QShortcut *for_html = new QShortcut(QKeySequence("ctrl+h"),this);
+    QObject::connect(for_html,SIGNAL(activated()),this,SLOT(HTML()));
+    QShortcut *for_plainText=new QShortcut(QKeySequence("ctrl+t"),this);
+    QObject::connect(for_plainText,SIGNAL(activated()),this,SLOT(plainText()));
+    QShortcut *for_rich_text= new QShortcut(QKeySequence("ctrl+b"),this);
+    QObject::connect(for_rich_text,SIGNAL(activated()),this,SLOT(return_richText()));
+}
 
 
 void MainWindow::text_color_changed()
@@ -274,8 +282,39 @@ void MainWindow::README(){
     open_file(file_path);
 
 }
+
 void MainWindow::about(){QMessageBox::information(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
 void MainWindow::close_application(){QApplication::closeAllWindows();}
+
+
+
+
+void MainWindow::MarkDown(){
+    before_text = ui->window_write->toPlainText();
+    QString text = ui->window_write->toPlainText();
+    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setMarkdown(text);
+}
+
+void MainWindow::HTML(){
+    before_text = ui->window_write->toPlainText();
+    QString text = ui->window_write->toPlainText();
+    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setHtml(text);
+}
+
+void MainWindow::plainText(){
+    before_text = ui->window_write->toPlainText();
+    QString text=ui->window_write->toPlainText();
+    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setPlainText(text);
+}
+
+void MainWindow::return_richText(){
+    if(before_text!=""){ ui->window_write->setText(before_text);}
+    before_text="";
+}
+
 void MainWindow::closeEvent(QCloseEvent *close)
 {   if(store_count==1){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);

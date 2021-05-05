@@ -109,6 +109,10 @@ compiler_rcc_clean:
 debug/qrc_note.cpp: ../Note/note.qrc \
 		C:/Qt/5.15.1/mingw81_64/bin/rcc.exe \
 		../Note/back.jpg \
+		../Note/semi-white.jpg \
+		../Note/blue.png \
+		../Note/yellow1.png \
+		../Note/yellow.jpg \
 		../Note/images\ (3).jpg
 	C:\Qt\5.15.1\mingw81_64\bin\rcc.exe -name note ..\Note\note.qrc -o debug\qrc_note.cpp
 
@@ -228,6 +232,9 @@ debug/moc_mainwindow.cpp: ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.15.1/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.1\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/anju/OneDrive/Desktop/Note/build-Note-Desktop_Qt_5_15_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/5.15.1/mingw81_64/mkspecs/win32-g++ -IC:/Users/anju/OneDrive/Desktop/Note/Note -IC:/Qt/5.15.1/mingw81_64/include -IC:/Qt/5.15.1/mingw81_64/include/QtWidgets -IC:/Qt/5.15.1/mingw81_64/include/QtGui -IC:/Qt/5.15.1/mingw81_64/include/QtANGLE -IC:/Qt/5.15.1/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\Note\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -362,6 +369,9 @@ debug/main.o: ../Note/main.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -478,6 +488,9 @@ debug/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
 		ui_mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QVariant \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
@@ -512,9 +525,6 @@ debug/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QShortcut \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qshortcut.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QTextStream \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QFile \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QFileDialog \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfiledialog.h \
@@ -522,7 +532,9 @@ debug/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qfileinfo.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/QCloseEvent \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QFontDialog \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfontdialog.h
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfontdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDirIterator \
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/qdiriterator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Note\mainwindow.cpp
 
 debug/qrc_note.o: debug/qrc_note.cpp 

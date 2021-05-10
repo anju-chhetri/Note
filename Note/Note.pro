@@ -12,9 +12,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp
 
-
 HEADERS += \
-
     mainwindow.h
 
 FORMS += \
@@ -25,6 +23,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+RC_ICONS = icon2.ico
+
 RESOURCES += \
     note.qrc
-RC_ICONS = icon1.ico

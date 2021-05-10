@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("NOTE");
     this->setCentralWidget(ui->window_write);
     set_shortcut_key();
-    setWindowIcon(QIcon(":/image/images (3).jpg"));
+    setWindowIcon(QIcon(":/image/icon1.jpg"));
     QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
 
     int i=0;
@@ -66,7 +66,7 @@ void MainWindow::call_increase_count(){
 
 void MainWindow::setbackground()
 {
-ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png)");
+ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg)");
 }
 
 
@@ -283,21 +283,21 @@ void MainWindow::close_application(){QApplication::closeAllWindows();}
 void MainWindow::MarkDown(){
     before_text = ui->window_write->toPlainText();
     QString text = ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
     ui->window_write->setMarkdown(text);
 }
 
 void MainWindow::HTML(){
     before_text = ui->window_write->toPlainText();
     QString text = ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
     ui->window_write->setHtml(text);
 }
 
 void MainWindow::plainText(){
     before_text = ui->window_write->toPlainText();
     QString text=ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
     ui->window_write->setPlainText(text);
 }
 

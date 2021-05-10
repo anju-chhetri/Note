@@ -1,10 +1,8 @@
 <RCC>
     <qresource prefix="/image">
-        <file>back.jpg</file>
-        <file>images (3).jpg</file>
-        <file>blue.png</file>
-        <file>semi-white.jpg</file>
-        <file>yellow.jpg</file>
-        <file>yellow1.png</file>
+        <file>icon1.jpg</file>
+        <file>test2.jpg</file>
+        <file>test3.png</file>
+        <file>test1.jpg</file>
     </qresource>
 </RCC>

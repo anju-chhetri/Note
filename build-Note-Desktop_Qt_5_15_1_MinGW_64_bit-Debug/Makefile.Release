@@ -108,12 +108,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_note.cpp
 release/qrc_note.cpp: ../Note/note.qrc \
 		C:/Qt/5.15.1/mingw81_64/bin/rcc.exe \
-		../Note/back.jpg \
-		../Note/semi-white.jpg \
-		../Note/blue.png \
-		../Note/yellow1.png \
-		../Note/yellow.jpg \
-		../Note/images\ (3).jpg
+		../Note/icon1.jpg \
+		../Note/test2.jpg \
+		../Note/test1.jpg \
+		../Note/test3.png
 	C:\Qt\5.15.1\mingw81_64\bin\rcc.exe -name note ..\Note\note.qrc -o release\qrc_note.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -372,13 +370,17 @@ release/main.o: ../Note/main.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qeventloop.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtGui/qinputmethod.h
+		C:/Qt/5.15.1/mingw81_64/include/QtGui/qinputmethod.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Note\main.cpp
 
 release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
@@ -534,7 +536,8 @@ release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QFontDialog \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfontdialog.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDirIterator \
-		C:/Qt/5.15.1/mingw81_64/include/QtCore/qdiriterator.h
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/qdiriterator.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Note\mainwindow.cpp
 
 release/qrc_note.o: release/qrc_note.cpp 

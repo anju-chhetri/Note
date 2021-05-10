@@ -10,20 +10,19 @@
 #include <QMenuBar>
 #include <QFontDialog>
 #include <QDirIterator>
+#include <QDebug>
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setbackground();
-    file_path="";
     this->setWindowTitle("NOTE");
     this->setCentralWidget(ui->window_write);
-    //connect(ui->window_write,SIGNAL(textChanged()),this, SLOT(text_color_changed()));
     set_shortcut_key();
     setWindowIcon(QIcon(":/image/images (3).jpg"));
-
     QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
+
     int i=0;
     QFile file(QDir::homePath()+"/Note_data.txt");
     if(!file.open(QFile::WriteOnly |QFile::ReadOnly | QFile::Text)){
@@ -35,16 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
             if(an.next()==(QDir::homePath()+"/Note_data.txt")){i=1;break;}
     }
     if(i==0){
-        output<<"";
+        output<<"Bell MT";
         file.flush();
     }
+
     QString data_read=output.readAll();
     QFont font=QFont(data_read);
-    font.setPointSize(10);
+    font.setPointSize(12);
     ui->window_write->setFont(font);
     file.close();
-    for_ReadMe_File();
- //   QTextStream cout(stdout);
     this->setGeometry(500,150,900,800);
 
  }
@@ -54,6 +52,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
+
 void MainWindow::call_increase_count(){
     store_count=1;
     if (file_path==""){
@@ -61,28 +62,14 @@ void MainWindow::call_increase_count(){
     }
     else{   setWindowTitle("*"+QFileInfo(file_path).fileName());}
             }
-void MainWindow::for_ReadMe_File(){
-    int i=0;
-    QDirIterator ite(QDir::homePath());
-    while(ite.hasNext()){
-        if(ite.next()==(QDir::homePath()+"/README_Note.txt")){i=1;break;}
-    }
-    if(i==0){
-        QFile file(QDir::homePath()+"/README_Note.txt");
-        if(!file.open(QFile::WriteOnly | QFile::Text)){
-            QMessageBox::warning(this,"Error","Error creating README file.");
-                    }
-        QTextStream display(&file);
-        display<<"ShortCut key used in Note: \n\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file\nCtrl+u = Undo \nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file\nCtrl+f = Open Font dialog box\nCtrl+d = Display README.txt file\n";
-        file.flush();
-        file.close();
-    }}
+
 
 void MainWindow::setbackground()
 {
 ui->window_write->setStyleSheet("background-image: url(:/image/yellow1.png)");
-//ui->window_write->setTextColor(QColor("white"));
 }
+
+
 
 void MainWindow::set_shortcut_key()
 {
@@ -109,7 +96,7 @@ void MainWindow::set_shortcut_key()
     QShortcut *for_font_change= new QShortcut(QKeySequence("ctrl+f"),this);
     QObject::connect(for_font_change,SIGNAL(activated()),this,SLOT(change_font()));
     QShortcut *for_README = new QShortcut(QKeySequence("ctrl+d"),this);
-    QObject::connect(for_README,SIGNAL(activated()),this,SLOT(README()));
+    QObject::connect(for_README,SIGNAL(activated()),this,SLOT(show_information()));
     QShortcut *for_about=new QShortcut(QKeySequence("ctrl+i"),this);
     QObject::connect(for_about,SIGNAL(activated()),this,SLOT(about()));
     QShortcut *for_close =new QShortcut(QKeySequence("ctrl+w"),this);
@@ -123,6 +110,10 @@ void MainWindow::set_shortcut_key()
     QShortcut *for_rich_text= new QShortcut(QKeySequence("ctrl+b"),this);
     QObject::connect(for_rich_text,SIGNAL(activated()),this,SLOT(return_richText()));
 }
+
+
+
+
 
 
 void MainWindow::text_color_changed()
@@ -170,9 +161,12 @@ void MainWindow::undo_text()
 }
 
 
+
+
+
 void MainWindow::check_open()
 {
-     statusBar()->showMessage("Open file.",2000);
+    statusBar()->showMessage("Open file.",2000);
     QString file_name=QFileDialog::getOpenFileName(this,"Open the file.");
     file_path=file_name;
     if(!file_name.isEmpty()){
@@ -189,6 +183,7 @@ void MainWindow::open_file(QString file_name)
         return;
     }
 
+    file_path = file_name;
     QTextStream input(&file);
     QString text_read= input.readAll();
     ui->window_write->setText(text_read);
@@ -277,11 +272,7 @@ void MainWindow::change_font()
         return;
 }
 
-void MainWindow::README(){
-    file_path=QDir::homePath()+"/README_Note.txt";
-    open_file(file_path);
 
-}
 
 void MainWindow::about(){QMessageBox::information(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
 void MainWindow::close_application(){QApplication::closeAllWindows();}
@@ -326,6 +317,64 @@ void MainWindow::closeEvent(QCloseEvent *close)
     }
     else{ close->ignore();}
 }}
+
+
 int MainWindow::store_count=0;
 
 
+
+void MainWindow::show_information(){
+
+    QMessageBox::about(this,"Key details","ShortCut keys used in Note:"
+                 "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
+                 "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
+                 "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
+                 "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
+                 "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
+                 "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
+                 "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
+         );
+}
+
+
+
+
+/*
+
+    QLabel *txt = new QLabel();
+    txt->setText("ShortCut keys used in Note:"
+                           "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
+                           "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
+                           "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
+                           "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
+                           "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
+                           "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
+                           "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
+                   );
+    txt->show();
+
+
+
+void MainWindow::README(){
+    file_path=QDir::homePath()+"/README_Note.txt";
+    open_file(file_path);
+
+}
+
+
+void MainWindow::for_ReadMe_File(){
+    int i=0;
+    QDirIterator ite(QDir::homePath());
+    while(ite.hasNext()){
+        if(ite.next()==(QDir::homePath()+"/README_Note.txt")){i=1;break;}
+    }
+    if(i==0){
+        QFile file(QDir::homePath()+"/README_Note.txt");
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
+            QMessageBox::warning(this,"Error","Error creating README file.");
+                    }
+        QTextStream display(&file);
+        display<<"ShortCut key used in Note: \n\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file\nCtrl+u = Undo \nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file\nCtrl+f = Open Font dialog box\nCtrl+d = Display README.txt file\n";
+        file.flush();
+        file.close();
+    }}*/

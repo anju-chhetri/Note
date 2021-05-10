@@ -12,26 +12,28 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void open_file(QString file_name);
 private:
     void open_new_file();
     void setbackground();
     void set_shortcut_key();
-    void open_file(QString file_name);
+
     void closeEvent(QCloseEvent *close );
-    void for_ReadMe_File();
     QString file_path;
     QString before_text;
     static int store_count;
 public slots:
+    void show_information();
     void return_richText();
     void MarkDown();
     void HTML();
     void plainText();
     void close_application();
     void about();
-    void README();
+
     void text_color_changed();
     void find_text();
     void copy_text();

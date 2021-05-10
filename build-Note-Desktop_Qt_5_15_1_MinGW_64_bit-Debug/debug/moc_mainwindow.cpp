@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[22];
-    char stringdata0[238];
+    char stringdata0[248];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,36 +33,36 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 15), // "return_richText"
-QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 8), // "MarkDown"
-QT_MOC_LITERAL(4, 37, 4), // "HTML"
-QT_MOC_LITERAL(5, 42, 9), // "plainText"
-QT_MOC_LITERAL(6, 52, 17), // "close_application"
-QT_MOC_LITERAL(7, 70, 5), // "about"
-QT_MOC_LITERAL(8, 76, 6), // "README"
-QT_MOC_LITERAL(9, 83, 18), // "text_color_changed"
-QT_MOC_LITERAL(10, 102, 9), // "find_text"
-QT_MOC_LITERAL(11, 112, 9), // "copy_text"
-QT_MOC_LITERAL(12, 122, 8), // "cut_text"
-QT_MOC_LITERAL(13, 131, 10), // "paste_text"
-QT_MOC_LITERAL(14, 142, 9), // "redo_text"
-QT_MOC_LITERAL(15, 152, 9), // "undo_text"
-QT_MOC_LITERAL(16, 162, 9), // "save_file"
-QT_MOC_LITERAL(17, 172, 13), // "check_save_as"
-QT_MOC_LITERAL(18, 186, 10), // "check_open"
-QT_MOC_LITERAL(19, 197, 8), // "new_file"
-QT_MOC_LITERAL(20, 206, 11), // "change_font"
-QT_MOC_LITERAL(21, 218, 19) // "call_increase_count"
+QT_MOC_LITERAL(1, 11, 16), // "show_information"
+QT_MOC_LITERAL(2, 28, 0), // ""
+QT_MOC_LITERAL(3, 29, 15), // "return_richText"
+QT_MOC_LITERAL(4, 45, 8), // "MarkDown"
+QT_MOC_LITERAL(5, 54, 4), // "HTML"
+QT_MOC_LITERAL(6, 59, 9), // "plainText"
+QT_MOC_LITERAL(7, 69, 17), // "close_application"
+QT_MOC_LITERAL(8, 87, 5), // "about"
+QT_MOC_LITERAL(9, 93, 18), // "text_color_changed"
+QT_MOC_LITERAL(10, 112, 9), // "find_text"
+QT_MOC_LITERAL(11, 122, 9), // "copy_text"
+QT_MOC_LITERAL(12, 132, 8), // "cut_text"
+QT_MOC_LITERAL(13, 141, 10), // "paste_text"
+QT_MOC_LITERAL(14, 152, 9), // "redo_text"
+QT_MOC_LITERAL(15, 162, 9), // "undo_text"
+QT_MOC_LITERAL(16, 172, 9), // "save_file"
+QT_MOC_LITERAL(17, 182, 13), // "check_save_as"
+QT_MOC_LITERAL(18, 196, 10), // "check_open"
+QT_MOC_LITERAL(19, 207, 8), // "new_file"
+QT_MOC_LITERAL(20, 216, 11), // "change_font"
+QT_MOC_LITERAL(21, 228, 19) // "call_increase_count"
 
     },
-    "MainWindow\0return_richText\0\0MarkDown\0"
-    "HTML\0plainText\0close_application\0about\0"
-    "README\0text_color_changed\0find_text\0"
-    "copy_text\0cut_text\0paste_text\0redo_text\0"
-    "undo_text\0save_file\0check_save_as\0"
-    "check_open\0new_file\0change_font\0"
-    "call_increase_count"
+    "MainWindow\0show_information\0\0"
+    "return_richText\0MarkDown\0HTML\0plainText\0"
+    "close_application\0about\0text_color_changed\0"
+    "find_text\0copy_text\0cut_text\0paste_text\0"
+    "redo_text\0undo_text\0save_file\0"
+    "check_save_as\0check_open\0new_file\0"
+    "change_font\0call_increase_count"
 };
 #undef QT_MOC_LITERAL
 
@@ -132,13 +132,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->return_richText(); break;
-        case 1: _t->MarkDown(); break;
-        case 2: _t->HTML(); break;
-        case 3: _t->plainText(); break;
-        case 4: _t->close_application(); break;
-        case 5: _t->about(); break;
-        case 6: _t->README(); break;
+        case 0: _t->show_information(); break;
+        case 1: _t->return_richText(); break;
+        case 2: _t->MarkDown(); break;
+        case 3: _t->HTML(); break;
+        case 4: _t->plainText(); break;
+        case 5: _t->close_application(); break;
+        case 6: _t->about(); break;
         case 7: _t->text_color_changed(); break;
         case 8: _t->find_text(); break;
         case 9: _t->copy_text(); break;

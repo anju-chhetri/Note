@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/image">
         <file>icon1.jpg</file>
-        <file>test2.jpg</file>
-        <file>test3.png</file>
-        <file>test1.jpg</file>
+        <file>#CCCCCC.png</file>
+        <file>#color.jpg</file>
+        <file>#FBF0D9.jpg</file>
     </qresource>
 </RCC>

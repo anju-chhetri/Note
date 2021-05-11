@@ -66,7 +66,7 @@ void MainWindow::call_increase_count(){
 
 void MainWindow::setbackground()
 {
-ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg)");
+ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg)");
 }
 
 
@@ -283,21 +283,21 @@ void MainWindow::close_application(){QApplication::closeAllWindows();}
 void MainWindow::MarkDown(){
     before_text = ui->window_write->toPlainText();
     QString text = ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setMarkdown(text);
 }
 
 void MainWindow::HTML(){
     before_text = ui->window_write->toPlainText();
     QString text = ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setHtml(text);
 }
 
 void MainWindow::plainText(){
     before_text = ui->window_write->toPlainText();
     QString text=ui->window_write->toPlainText();
-    ui->window_write->setStyleSheet("background-image: url(:/image/test1.jpg);");
+    ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setPlainText(text);
 }
 
@@ -322,38 +322,38 @@ void MainWindow::closeEvent(QCloseEvent *close)
 int MainWindow::store_count=0;
 
 
+#include <QLabel>
 
 void MainWindow::show_information(){
+QLabel *l = new QLabel;
+l->setText("ShortCut keys used in Note:"
+                       "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
+                       "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
+                       "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
+                       "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
+                       "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
+                       "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
+                       "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
+               );
 
-    QMessageBox::about(this,"Key details","ShortCut keys used in Note:"
-                 "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
-                 "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
-                 "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
-                 "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
-                 "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
-                 "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
-                 "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
-         );
+QFont font = QFont("Bell MT");
+font.setPointSize(12);
+l->setFont(font);
+l->setStyleSheet("background-image: url(:/image/#CCCCCC.png);");
+l->show();
+
 }
 
 
 
 
+
+
+
+
+
+
 /*
-
-    QLabel *txt = new QLabel();
-    txt->setText("ShortCut keys used in Note:"
-                           "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
-                           "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
-                           "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
-                           "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
-                           "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
-                           "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
-                           "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
-                   );
-    txt->show();
-
-
 
 void MainWindow::README(){
     file_path=QDir::homePath()+"/README_Note.txt";

@@ -20,11 +20,11 @@ private:
     void open_new_file();
     void setbackground();
     void set_key();
-
     void closeEvent(QCloseEvent *close );
     QString file_path;
     QString before_text;
     static int store_count;
+
 public slots:
     void show_information();
     void return_richText();

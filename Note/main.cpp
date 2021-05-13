@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <QLabel>
 #include <QApplication>
 #include <QString>
 int main(int argc, char *argv[])
@@ -12,9 +11,6 @@ int main(int argc, char *argv[])
         QString path_file=argv[argc-1];
         path_file.replace("\\","/");
         w.open_file(path_file);
-        QLabel l;
-        l.setText("once");
-        l.show();
     }
 
 

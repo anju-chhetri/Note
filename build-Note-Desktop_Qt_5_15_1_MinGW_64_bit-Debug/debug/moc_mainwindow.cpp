@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[22];
-    char stringdata0[248];
+    QByteArrayData data[21];
+    char stringdata0[238];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,27 +42,26 @@ QT_MOC_LITERAL(6, 59, 9), // "plainText"
 QT_MOC_LITERAL(7, 69, 17), // "close_application"
 QT_MOC_LITERAL(8, 87, 5), // "about"
 QT_MOC_LITERAL(9, 93, 18), // "text_color_changed"
-QT_MOC_LITERAL(10, 112, 9), // "find_text"
-QT_MOC_LITERAL(11, 122, 9), // "copy_text"
-QT_MOC_LITERAL(12, 132, 8), // "cut_text"
-QT_MOC_LITERAL(13, 141, 10), // "paste_text"
-QT_MOC_LITERAL(14, 152, 9), // "redo_text"
-QT_MOC_LITERAL(15, 162, 9), // "undo_text"
-QT_MOC_LITERAL(16, 172, 9), // "save_file"
-QT_MOC_LITERAL(17, 182, 13), // "check_save_as"
-QT_MOC_LITERAL(18, 196, 10), // "check_open"
-QT_MOC_LITERAL(19, 207, 8), // "new_file"
-QT_MOC_LITERAL(20, 216, 11), // "change_font"
-QT_MOC_LITERAL(21, 228, 19) // "call_increase_count"
+QT_MOC_LITERAL(10, 112, 9), // "copy_text"
+QT_MOC_LITERAL(11, 122, 8), // "cut_text"
+QT_MOC_LITERAL(12, 131, 10), // "paste_text"
+QT_MOC_LITERAL(13, 142, 9), // "redo_text"
+QT_MOC_LITERAL(14, 152, 9), // "undo_text"
+QT_MOC_LITERAL(15, 162, 9), // "save_file"
+QT_MOC_LITERAL(16, 172, 13), // "check_save_as"
+QT_MOC_LITERAL(17, 186, 10), // "check_open"
+QT_MOC_LITERAL(18, 197, 8), // "new_file"
+QT_MOC_LITERAL(19, 206, 11), // "change_font"
+QT_MOC_LITERAL(20, 218, 19) // "call_increase_count"
 
     },
     "MainWindow\0show_information\0\0"
     "return_richText\0MarkDown\0HTML\0plainText\0"
     "close_application\0about\0text_color_changed\0"
-    "find_text\0copy_text\0cut_text\0paste_text\0"
-    "redo_text\0undo_text\0save_file\0"
-    "check_save_as\0check_open\0new_file\0"
-    "change_font\0call_increase_count"
+    "copy_text\0cut_text\0paste_text\0redo_text\0"
+    "undo_text\0save_file\0check_save_as\0"
+    "check_open\0new_file\0change_font\0"
+    "call_increase_count"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +71,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,29 +79,27 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  114,    2, 0x0a /* Public */,
-       3,    0,  115,    2, 0x0a /* Public */,
-       4,    0,  116,    2, 0x0a /* Public */,
-       5,    0,  117,    2, 0x0a /* Public */,
-       6,    0,  118,    2, 0x0a /* Public */,
-       7,    0,  119,    2, 0x0a /* Public */,
-       8,    0,  120,    2, 0x0a /* Public */,
-       9,    0,  121,    2, 0x0a /* Public */,
-      10,    0,  122,    2, 0x0a /* Public */,
-      11,    0,  123,    2, 0x0a /* Public */,
-      12,    0,  124,    2, 0x0a /* Public */,
-      13,    0,  125,    2, 0x0a /* Public */,
-      14,    0,  126,    2, 0x0a /* Public */,
-      15,    0,  127,    2, 0x0a /* Public */,
-      16,    0,  128,    2, 0x0a /* Public */,
-      17,    0,  129,    2, 0x0a /* Public */,
-      18,    0,  130,    2, 0x0a /* Public */,
-      19,    0,  131,    2, 0x0a /* Public */,
-      20,    0,  132,    2, 0x0a /* Public */,
-      21,    0,  133,    2, 0x0a /* Public */,
+       1,    0,  109,    2, 0x0a /* Public */,
+       3,    0,  110,    2, 0x0a /* Public */,
+       4,    0,  111,    2, 0x0a /* Public */,
+       5,    0,  112,    2, 0x0a /* Public */,
+       6,    0,  113,    2, 0x0a /* Public */,
+       7,    0,  114,    2, 0x0a /* Public */,
+       8,    0,  115,    2, 0x0a /* Public */,
+       9,    0,  116,    2, 0x0a /* Public */,
+      10,    0,  117,    2, 0x0a /* Public */,
+      11,    0,  118,    2, 0x0a /* Public */,
+      12,    0,  119,    2, 0x0a /* Public */,
+      13,    0,  120,    2, 0x0a /* Public */,
+      14,    0,  121,    2, 0x0a /* Public */,
+      15,    0,  122,    2, 0x0a /* Public */,
+      16,    0,  123,    2, 0x0a /* Public */,
+      17,    0,  124,    2, 0x0a /* Public */,
+      18,    0,  125,    2, 0x0a /* Public */,
+      19,    0,  126,    2, 0x0a /* Public */,
+      20,    0,  127,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -140,18 +137,17 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->close_application(); break;
         case 6: _t->about(); break;
         case 7: _t->text_color_changed(); break;
-        case 8: _t->find_text(); break;
-        case 9: _t->copy_text(); break;
-        case 10: _t->cut_text(); break;
-        case 11: _t->paste_text(); break;
-        case 12: _t->redo_text(); break;
-        case 13: _t->undo_text(); break;
-        case 14: _t->save_file(); break;
-        case 15: _t->check_save_as(); break;
-        case 16: _t->check_open(); break;
-        case 17: _t->new_file(); break;
-        case 18: _t->change_font(); break;
-        case 19: _t->call_increase_count(); break;
+        case 8: _t->copy_text(); break;
+        case 9: _t->cut_text(); break;
+        case 10: _t->paste_text(); break;
+        case 11: _t->redo_text(); break;
+        case 12: _t->undo_text(); break;
+        case 13: _t->save_file(); break;
+        case 14: _t->check_save_as(); break;
+        case 15: _t->check_open(); break;
+        case 16: _t->new_file(); break;
+        case 17: _t->change_font(); break;
+        case 18: _t->call_increase_count(); break;
         default: ;
         }
     }
@@ -187,13 +183,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 19;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 20)
+        if (_id < 19)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 20;
+        _id -= 19;
     }
     return _id;
 }

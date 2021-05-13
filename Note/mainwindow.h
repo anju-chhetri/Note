@@ -33,9 +33,7 @@ public slots:
     void plainText();
     void close_application();
     void about();
-
     void text_color_changed();
-    void find_text();
     void copy_text();
     void cut_text();
     void paste_text();

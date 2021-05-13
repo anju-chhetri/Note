@@ -19,10 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     setbackground();
     this->setWindowTitle("NOTE");
     this->setCentralWidget(ui->window_write);
-    set_key();
     setWindowIcon(QIcon(":/image/icon1.jpg"));
     QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
-
     int i=0;
     QFile file(QDir::homePath()+"/Note_data.txt");
     if(!file.open(QFile::WriteOnly |QFile::ReadOnly | QFile::Text)){
@@ -37,14 +35,13 @@ MainWindow::MainWindow(QWidget *parent)
         output<<"Bell MT";
         file.flush();
     }
-
     QString data_read=output.readAll();
+    file.close();
     QFont font=QFont(data_read);
     font.setPointSize(12);
     ui->window_write->setFont(font);
-    file.close();
     this->setGeometry(500,150,900,800);
-
+    set_key();
  }
 
 MainWindow::~MainWindow()
@@ -58,7 +55,7 @@ MainWindow::~MainWindow()
 void MainWindow::call_increase_count(){
     store_count=1;
     if (file_path==""){
-        setWindowTitle("Untitled file");
+        setWindowTitle("[UNNAMED]");
     }
     else{   setWindowTitle("*"+QFileInfo(file_path).fileName());}
             }
@@ -73,29 +70,27 @@ ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg)");
 
 void MainWindow::set_key()
 {
-    QShortcut *for_cut=new QShortcut(QKeySequence("ctrl+shift+x"),this);
+    QShortcut *for_cut=new QShortcut(QKeySequence("ctrl+x"),this);
     QObject::connect(for_cut, SIGNAL(activated()),this,SLOT(cut_text()));
-    QShortcut *for_copy=new QShortcut(QKeySequence("ctrl+shift+c"), this);
+    QShortcut *for_copy=new QShortcut(QKeySequence("ctrl+c"), this);
     QObject::connect(for_copy, SIGNAL(activated()),this,SLOT(copy_text()));
-    QShortcut *for_paste=new QShortcut(QKeySequence("ctrl+shift+v"),this);
+    QShortcut *for_paste=new QShortcut(QKeySequence("ctrl+v"),this);
     QObject::connect(for_paste, SIGNAL(activated()),this,SLOT(paste_text()));
     QShortcut *for_undo=new QShortcut(QKeySequence("ctrl+u"), this);
     QObject::connect(for_undo, SIGNAL(activated()),this,SLOT(undo_text()));
     QShortcut *for_redo=new QShortcut(QKeySequence("ctrl+r"), this);
     QObject::connect(for_redo, SIGNAL(activated()),this,SLOT(redo_text()));
-   // QShortcut *for_find=new QShortcut(QKeySequence("ctrl+f"), this);
-    //QObject::connect(for_find, SIGNAL(activated()),this,SLOT(find_text()));
     QShortcut *for_open=new QShortcut(QKeySequence("ctrl+o"),this);
     QObject::connect(for_open,SIGNAL(activated()),this,SLOT(check_open()));
     QShortcut *for_save=new QShortcut(QKeySequence("ctrl+s"),this);
     QObject::connect(for_save,SIGNAL(activated()),this,SLOT(save_file()));
     QShortcut *for_save_as=new QShortcut(QKeySequence("ctrl+shift+s"),this);
     QObject::connect(for_save_as,SIGNAL(activated()),this,SLOT(check_save_as()));
-    QShortcut *for_new=new QShortcut(QKeySequence("ctrl+shift+n"),this);
+    QShortcut *for_new=new QShortcut(QKeySequence("ctrl+n"),this);
     QObject::connect(for_new,SIGNAL(activated()),this,SLOT(new_file()));
     QShortcut *for_font_change= new QShortcut(QKeySequence("ctrl+f"),this);
     QObject::connect(for_font_change,SIGNAL(activated()),this,SLOT(change_font()));
-    QShortcut *for_README = new QShortcut(QKeySequence("ctrl+d"),this);
+    QShortcut *for_README = new QShortcut(QKeySequence("ctrl+k"),this);
     QObject::connect(for_README,SIGNAL(activated()),this,SLOT(show_information()));
     QShortcut *for_about=new QShortcut(QKeySequence("ctrl+i"),this);
     QObject::connect(for_about,SIGNAL(activated()),this,SLOT(about()));
@@ -119,12 +114,6 @@ void MainWindow::set_key()
 void MainWindow::text_color_changed()
 {
     ui->window_write->setTextColor(QColor("white"));
-}
-
-void MainWindow::find_text()
-{
- statusBar()->showMessage("Search for a text.",2000);
-
 }
 
 void MainWindow::copy_text()
@@ -246,7 +235,7 @@ void MainWindow::open_new_file(){
     statusBar()->showMessage("Opening new file.",1000);
     ui->window_write->setText("");
     file_path="";
-    this->setWindowTitle("New file");
+    this->setWindowTitle("[UNNAMED]");
     store_count=0;
         }
 
@@ -282,28 +271,30 @@ void MainWindow::close_application(){QApplication::closeAllWindows();}
 
 void MainWindow::MarkDown(){
     before_text = ui->window_write->toPlainText();
-    QString text = ui->window_write->toPlainText();
+    QString text = before_text;
     ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setMarkdown(text);
 }
 
 void MainWindow::HTML(){
     before_text = ui->window_write->toPlainText();
-    QString text = ui->window_write->toPlainText();
+    QString text = before_text;
     ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setHtml(text);
 }
 
 void MainWindow::plainText(){
     before_text = ui->window_write->toPlainText();
-    QString text=ui->window_write->toPlainText();
+    QString text=before_text;
     ui->window_write->setStyleSheet("background-image: url(:/image/#FBF0D9.jpg);");
     ui->window_write->setPlainText(text);
 }
 
 void MainWindow::return_richText(){
-    if(before_text!=""){ ui->window_write->setText(before_text);}
+    if(before_text!=""){
+         ui->window_write->setPlainText(before_text);}
     before_text="";
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *close)
@@ -325,56 +316,22 @@ int MainWindow::store_count=0;
 #include <QLabel>
 
 void MainWindow::show_information(){
-QLabel *l = new QLabel;
-l->setText("ShortCut keys used in Note:"
-                       "\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy"
-                       "\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file"
+QLabel *l = new QLabel();
+l->setText("Key Combination used in Note:"
+                       "\nCtrl+x = Cut \nCtrl+c  = Copy"
+                       "\nCtrl+v = Paste \nCtrl+s = Save_as\nCtrl+n = New file"
                        "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
-                       "\nCtrl+f = Open Font dialog box\nCtrl+d = Display key information"
+                       "\nCtrl+f = Open Font dialog box\nCtrl+k = Display key information"
                        "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
                        "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
                        "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
                );
 
-QFont font = QFont("Bell MT");
-font.setPointSize(12);
+QFont font ;
+font.setPointSize(11);
 l->setFont(font);
-l->setStyleSheet("background-image: url(:/image/#CCCCCC.png);");
+l->setStyleSheet("background-image: url(:/image/label_back.jpg);");
 l->show();
 
 }
 
-
-
-
-
-
-
-
-
-
-/*
-
-void MainWindow::README(){
-    file_path=QDir::homePath()+"/README_Note.txt";
-    open_file(file_path);
-
-}
-
-
-void MainWindow::for_ReadMe_File(){
-    int i=0;
-    QDirIterator ite(QDir::homePath());
-    while(ite.hasNext()){
-        if(ite.next()==(QDir::homePath()+"/README_Note.txt")){i=1;break;}
-    }
-    if(i==0){
-        QFile file(QDir::homePath()+"/README_Note.txt");
-        if(!file.open(QFile::WriteOnly | QFile::Text)){
-            QMessageBox::warning(this,"Error","Error creating README file.");
-                    }
-        QTextStream display(&file);
-        display<<"ShortCut key used in Note: \n\nCtrl+Shift +x = Cut \nCtrl+Shift+c  = Copy\nCtrl+Shift+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+Shift+n = New file\nCtrl+u = Undo \nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file\nCtrl+f = Open Font dialog box\nCtrl+d = Display README.txt file\n";
-        file.flush();
-        file.close();
-    }}*/

@@ -111,7 +111,8 @@ release/qrc_note.cpp: ../Note/note.qrc \
 		../Note/icon1.jpg \
 		../Note/\#color.jpg \
 		../Note/\#FBF0D9.jpg \
-		../Note/\#CCCCCC.png
+		../Note/\#CCCCCC.png \
+		../Note/label_back.jpg
 	C:\Qt\5.15.1\mingw81_64\bin\rcc.exe -name note ..\Note\note.qrc -o release\qrc_note.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -370,9 +371,6 @@ release/main.o: ../Note/main.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qcoreapplication.h \

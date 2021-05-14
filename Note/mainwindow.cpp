@@ -11,6 +11,7 @@
 #include <QFontDialog>
 #include <QDirIterator>
 #include <QDebug>
+#include <QLabel>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
      ui(new Ui::MainWindow)
@@ -47,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 
@@ -109,28 +111,18 @@ void MainWindow::set_key()
 
 
 
-
-
-void MainWindow::text_color_changed()
-{
-    ui->window_write->setTextColor(QColor("white"));
-}
-
 void MainWindow::copy_text()
 {
 ui->window_write->copy();
-statusBar()->showMessage("Text copied.",2000);
 }
 
 void MainWindow::cut_text()
 {
-statusBar()->showMessage("Cut.",2000);
-    ui->window_write->cut();
+ui->window_write->cut();
 }
 
 void MainWindow::paste_text()
 {
-    statusBar()->showMessage("Paste.",2000);
 if(ui->window_write->canPaste()){
 
     ui->window_write->paste();
@@ -139,14 +131,11 @@ if(ui->window_write->canPaste()){
 
 void MainWindow::redo_text()
 {
-     statusBar()->showMessage("Redo.",1000);
-    ui->window_write->redo();
+ ui->window_write->redo();
 }
 void MainWindow::undo_text()
 {
-     statusBar()->showMessage("Undo.",1000);
-    ui->window_write->undo();
-
+ ui->window_write->undo();
 }
 
 
@@ -155,7 +144,6 @@ void MainWindow::undo_text()
 
 void MainWindow::check_open()
 {
-    statusBar()->showMessage("Open file.",2000);
     QString file_name=QFileDialog::getOpenFileName(this,"Open the file.");
     file_path=file_name;
     if(!file_name.isEmpty()){
@@ -178,6 +166,7 @@ void MainWindow::open_file(QString file_name)
     ui->window_write->setText(text_read);
     this->setWindowTitle(QFileInfo(file_name).fileName());
     file.close();
+
     store_count=0;
 }
 void MainWindow::save_file()
@@ -196,7 +185,6 @@ void MainWindow::save_file()
     output<<text_write;
     file.flush();
     file.close();
-    statusBar()->showMessage("file saved.",2000);
     this->setWindowTitle(QFileInfo(file_path).fileName());
     store_count=0;
     break;
@@ -204,7 +192,6 @@ void MainWindow::save_file()
 
 void MainWindow::check_save_as()
 {
-     statusBar()->showMessage("Save file as",2000);
      QString file_name=QFileDialog::getSaveFileName(this,"save file as");
      file_path=file_name;
      if(!file_name.isEmpty()){
@@ -263,7 +250,7 @@ void MainWindow::change_font()
 
 
 
-void MainWindow::about(){QMessageBox::information(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
+void MainWindow::about(){QMessageBox::about(this,"About","This editor was designed to reduce the use of\nmouse as much as possible. All the key combination can be seen in Note_data file by pressing Ctrl+d.  ");}
 void MainWindow::close_application(){QApplication::closeAllWindows();}
 
 
@@ -300,15 +287,16 @@ void MainWindow::return_richText(){
 void MainWindow::closeEvent(QCloseEvent *close)
 {   if(store_count==1){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
-    if (button==QMessageBox::Yes){close->accept();}
+    if (button==QMessageBox::Yes){delete la;close->accept();}
     else if(button==QMessageBox::Save){
         save_file();
         if(file_path==""){close->ignore();}
 
     }
     else{ close->ignore();}
-}}
+}
 
+}
 
 int MainWindow::store_count=0;
 
@@ -316,22 +304,23 @@ int MainWindow::store_count=0;
 #include <QLabel>
 
 void MainWindow::show_information(){
-QLabel *l = new QLabel();
-l->setText("Key Combination used in Note:"
-                       "\nCtrl+x = Cut \nCtrl+c  = Copy"
-                       "\nCtrl+v = Paste \nCtrl+s = Save_as\nCtrl+n = New file"
-                       "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
-                       "\nCtrl+f = Open Font dialog box\nCtrl+k = Display key information"
-                       "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
-                       "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
-                       "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
-               );
+   la = new QLabel;
+   la->setText("Key Combinations used in Note:\n"
+                           "\nCtrl+x = Cut \nCtrl+c  = Copy"
+                           "\nCtrl+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+n = New file"
+                           "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
+                           "\nCtrl+f = Open Font dialog box\nCtrl+k = Display key information"
+                           "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
+                           "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
+                           "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
+                   );
 
-QFont font ;
-font.setPointSize(11);
-l->setFont(font);
-l->setStyleSheet("background-image: url(:/image/label_back.jpg);");
-l->show();
+    QFont font ;
+    font.setPointSize(11);
+    la->setFont(font);
+    la->setStyleSheet("background-image: url(:/image/label_back.jpg);");
+    la->setFixedSize(550,550);
+    la->show();
 
 }
 

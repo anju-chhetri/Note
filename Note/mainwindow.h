@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QLabel>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,6 +18,7 @@ public:
     ~MainWindow();
     void open_file(QString file_name);
 private:
+
     void open_new_file();
     void setbackground();
     void set_key();
@@ -24,6 +26,7 @@ private:
     QString file_path;
     QString before_text;
     static int store_count;
+    QLabel *la=nullptr;
 
 public slots:
     void show_information();
@@ -33,7 +36,6 @@ public slots:
     void plainText();
     void close_application();
     void about();
-    void text_color_changed();
     void copy_text();
     void cut_text();
     void paste_text();
@@ -49,4 +51,5 @@ private:
     Ui::MainWindow *ui;
 
 };
+
 #endif // MAINWINDOW_H

@@ -234,6 +234,9 @@ release/moc_mainwindow.cpp: ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		release/moc_predefs.h \
 		C:/Qt/5.15.1/mingw81_64/bin/moc.exe
 	C:\Qt\5.15.1\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/anju/OneDrive/Desktop/Note/build-Note-Desktop_Qt_5_15_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.15.1/mingw81_64/mkspecs/win32-g++ -IC:/Users/anju/OneDrive/Desktop/Note/Note -IC:/Qt/5.15.1/mingw81_64/include -IC:/Qt/5.15.1/mingw81_64/include/QtWidgets -IC:/Qt/5.15.1/mingw81_64/include/QtGui -IC:/Qt/5.15.1/mingw81_64/include/QtANGLE -IC:/Qt/5.15.1/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\Note\mainwindow.h -o release\moc_mainwindow.cpp
@@ -371,6 +374,9 @@ release/main.o: ../Note/main.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -491,6 +497,9 @@ release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		ui_mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QVariant \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QApplication \
@@ -515,7 +524,6 @@ release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QTextEdit \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qtextedit.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtextdocument.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtextoption.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtGui/qtextcursor.h \
@@ -535,9 +543,7 @@ release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfontdialog.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDirIterator \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qdiriterator.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDebug \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QLabel \
-		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlabel.h
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Note\mainwindow.cpp
 
 release/qrc_note.o: release/qrc_note.cpp 

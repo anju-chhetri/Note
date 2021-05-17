@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->window_write->setFont(font);
     this->setGeometry(500,150,900,800);
     set_key();
+
  }
 
 MainWindow::~MainWindow()
@@ -55,6 +56,10 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::call_increase_count(){
+    QString ui_words = ui->window_write->toPlainText();
+    QStringList words = ui_words.split(" ");
+
+    statusBar()->showMessage("total words: "+QString::number(words.length()-1),1000);
     store_count=1;
     if (file_path==""){
         setWindowTitle("[UNNAMED]");

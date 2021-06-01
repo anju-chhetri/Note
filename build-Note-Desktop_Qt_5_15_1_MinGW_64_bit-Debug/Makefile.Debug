@@ -109,7 +109,6 @@ compiler_rcc_clean:
 debug/qrc_note.cpp: ../Note/note.qrc \
 		C:/Qt/5.15.1/mingw81_64/bin/rcc.exe \
 		../Note/icon1.jpg \
-		../Note/\#color.jpg \
 		../Note/\#FBF0D9.jpg \
 		../Note/\#CCCCCC.png \
 		../Note/label_back.jpg

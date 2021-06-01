@@ -2,7 +2,6 @@
     <qresource prefix="/image">
         <file>icon1.jpg</file>
         <file>#CCCCCC.png</file>
-        <file>#color.jpg</file>
         <file>#FBF0D9.jpg</file>
         <file>label_back.jpg</file>
     </qresource>

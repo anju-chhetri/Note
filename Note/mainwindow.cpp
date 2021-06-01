@@ -358,7 +358,7 @@ void For_key::show_information(){
     QFont font ;
     font.setPointSize(11);
     la->setFont(font);
-    la->setFixedSize(550,600);
+    la->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
     la->show();
 }
 For_key::~For_key(){

@@ -7,8 +7,14 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+class For_key{
+public:
+    ~For_key();
+    QLabel *la=nullptr;
+    void show_information();
+};
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow,public For_key
 {
     Q_OBJECT
 
@@ -18,18 +24,15 @@ public:
     ~MainWindow();
     void open_file(QString file_name);
 private:
-
     void open_new_file();
-    void setbackground();
     void set_key();
     void closeEvent(QCloseEvent *close );
     QString file_path;
     QString before_text;
     static int store_count;
-    QLabel *la=nullptr;
-
+    static int input_cmd;
 public slots:
-    void show_information();
+    void get_input_cmd();
     void return_richText();
     void MarkDown();
     void HTML();
@@ -47,9 +50,11 @@ public slots:
     void new_file();
     void change_font();
     void call_increase_count();
+    void call_other_class();
 private:
     Ui::MainWindow *ui;
 
 };
+
 
 #endif // MAINWINDOW_H

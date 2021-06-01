@@ -543,7 +543,10 @@ release/mainwindow.o: ../Note/mainwindow.cpp ../Note/mainwindow.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qfontdialog.h \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDirIterator \
 		C:/Qt/5.15.1/mingw81_64/include/QtCore/qdiriterator.h \
-		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDebug
+		C:/Qt/5.15.1/mingw81_64/include/QtCore/QDebug \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/QInputDialog \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qinputdialog.h \
+		C:/Qt/5.15.1/mingw81_64/include/QtWidgets/qlineedit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Note\mainwindow.cpp
 
 release/qrc_note.o: release/qrc_note.cpp 

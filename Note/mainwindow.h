@@ -39,9 +39,7 @@ public slots:
     void plainText();
     void close_application();
     void about();
-    void copy_text();
-    void cut_text();
-    void paste_text();
+
     void redo_text();
     void undo_text();
     void save_file();

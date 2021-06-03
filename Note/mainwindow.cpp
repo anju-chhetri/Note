@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(tr("NOTE"));
-   this->setCentralWidget(ui->window_write);
+    this->setCentralWidget(ui->window_write);
     setWindowIcon(QIcon(":/image/icon1.jpg"));
     QObject::connect(ui->window_write,SIGNAL(textChanged()),this,SLOT(call_increase_count()));
     int i=0;
@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
                                   "background-image: url(:/image/#FBF0D9.jpg)"
                                     "}");
 
-    ui->window_write->styleSheet();
+    ui->window_write->setAcceptRichText(false);
 }
 
 MainWindow::~MainWindow()
@@ -69,27 +69,26 @@ MainWindow::~MainWindow()
 
 
 void MainWindow::call_increase_count(){
+    QTextCursor cursor = ui->window_write->textCursor();
+    int row = cursor.blockNumber();
+    int col = cursor.columnNumber() + 1;
+    statusBar()->showMessage("R : "+QString::number(row+1)+" | C: "+QString::number(col));
     QString ui_words = ui->window_write->toPlainText();
     QStringList words = ui_words.split(" ");
     if(input_cmd==1)
-        statusBar()->showMessage("total words: "+QString::number(words.length()-1));
+        statusBar()->showMessage("R : "+QString::number(row+1)+" | C: "+QString::number(col)+"\t\t\t  total words: "+QString::number(words.length()-1));
     store_count=1;
     if (file_path==""){
         setWindowTitle("[UNNAMED]");
     }
     else{   setWindowTitle("*"+QFileInfo(file_path).fileName());}
-            }
+
+}
 
 
 
 void MainWindow::set_key()
 {
-    QShortcut *for_cut=new QShortcut(QKeySequence("ctrl+x"),this);
-    QObject::connect(for_cut, SIGNAL(activated()),this,SLOT(cut_text()));
-    QShortcut *for_copy=new QShortcut(QKeySequence("ctrl+c"), this);
-    QObject::connect(for_copy, SIGNAL(activated()),this,SLOT(copy_text()));
-    QShortcut *for_paste=new QShortcut(QKeySequence("ctrl+v"),this);
-    QObject::connect(for_paste, SIGNAL(activated()),this,SLOT(paste_text()));
     QShortcut *for_undo=new QShortcut(QKeySequence("ctrl+u"), this);
     QObject::connect(for_undo, SIGNAL(activated()),this,SLOT(undo_text()));
     QShortcut *for_redo=new QShortcut(QKeySequence("ctrl+r"), this);
@@ -123,26 +122,6 @@ void MainWindow::set_key()
 }
 
 
-
-
-void MainWindow::copy_text()
-{
-ui->window_write->copy();
-}
-
-void MainWindow::cut_text()
-{
-ui->window_write->cut();
-}
-
-void MainWindow::paste_text()
-{
-if(ui->window_write->canPaste()){
-
-    ui->window_write->paste();
-}
-}
-
 void MainWindow::redo_text()
 {
  ui->window_write->redo();
@@ -152,10 +131,6 @@ void MainWindow::undo_text()
 {
  ui->window_write->undo();
 }
-
-
-
-
 
 void MainWindow::check_open()
 {
@@ -312,8 +287,10 @@ void MainWindow::get_input_cmd(){
         else
             statusBar()->showMessage("No such command found.",1000);
     }
+    int row = ui->window_write->textCursor().blockNumber();
+    int col = ui->window_write->textCursor().positionInBlock();
     if(input_cmd==0)
-            statusBar()->showMessage("");
+            statusBar()->showMessage("R : "+QString::number(row+1)+" | C: "+QString::number(col));
 
 }
 
@@ -343,8 +320,7 @@ void For_key::show_information(){
    delete la;
    la = new QLabel;
    la->setText("Key Combinations used in Note:\n"
-                           "\nCtrl+x = Cut \nCtrl+c  = Copy"
-                           "\nCtrl+v = Paste \nCtrl+Shift+s = Save_as\nCtrl+n = New file"
+                           "\nCtrl+Shift+s = Save_as\nCtrl+n = New file"
                            "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
                            "\nCtrl+f = Open Font dialog box\nCtrl+k = Display key information"
                            "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
@@ -364,6 +340,4 @@ void For_key::show_information(){
 For_key::~For_key(){
     delete la;
 }
-
-
 

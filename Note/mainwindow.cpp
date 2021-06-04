@@ -67,7 +67,6 @@ MainWindow::~MainWindow()
 
 
 
-
 void MainWindow::call_increase_count(){
     QTextCursor cursor = ui->window_write->textCursor();
     int row = cursor.blockNumber();
@@ -119,6 +118,7 @@ void MainWindow::set_key()
     QObject::connect(for_rich_text,SIGNAL(activated()),this,SLOT(return_richText()));
     QShortcut *for_input_cmd = new QShortcut(QKeySequence("ctrl+shift+i"),this);
     QObject::connect(for_input_cmd,SIGNAL(activated()),this,SLOT(get_input_cmd()));
+
 }
 
 
@@ -294,6 +294,16 @@ void MainWindow::get_input_cmd(){
 
 }
 
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+if(event->key()==61)
+    ui->window_write->zoomIn(1);
+if(event->key()==45)
+    ui->window_write->zoomOut(1);
+
+}
+
+
 void MainWindow::closeEvent(QCloseEvent *close)
 {   if(store_count==1){
     QMessageBox::StandardButton button = QMessageBox::question(this,"Unsaved changes.", "Close anyway?",QMessageBox::Yes|QMessageBox::No | QMessageBox::Save);
@@ -319,14 +329,16 @@ For_key::show_information();
 void For_key::show_information(){
    delete la;
    la = new QLabel;
-   la->setText("Key Combinations used in Note:\n"
+   la->setText("Key Combinations :\n"
                            "\nCtrl+Shift+s = Save_as\nCtrl+n = New file"
                            "\nCtrl+u = Undo\nCtrl+r = Redo\nCtrl+o = Open file\nCtrl+s = Save file"
                            "\nCtrl+f = Open Font dialog box\nCtrl+k = Display key information"
                            "\nCtrl+i = Display information about Note\nCtrl+w = Quit the application"
                            "\nCtrl+h = Display text in HTML format \nCtrl+m = Display text in markdown format"
                            "\nCtrl+t = Display the text in Plain text format \nCtrl+b = Return from current format to pervious one"
-                           "\nCtrl+Shift+i = Open command box."
+               "\nCtrl+Plus(+) = ZoomIn"
+               "\nCtrl+Minus(-) = ZoomOut"
+               "\nCtrl+Shift+i = Open command box."
                            "\n cmd: word count : Display total number of words."
                            "\n         word count -o : Stop showing the word number."
                );

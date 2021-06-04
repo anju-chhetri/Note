@@ -24,6 +24,7 @@ public:
     ~MainWindow();
     void open_file(QString file_name);
 private:
+    void keyPressEvent(QKeyEvent *event);
     void open_new_file();
     void set_key();
     void closeEvent(QCloseEvent *close );
@@ -31,7 +32,9 @@ private:
     QString before_text;
     static int store_count;
     static int input_cmd;
+
 public slots:
+
     void get_input_cmd();
     void return_richText();
     void MarkDown();
@@ -39,7 +42,6 @@ public slots:
     void plainText();
     void close_application();
     void about();
-
     void redo_text();
     void undo_text();
     void save_file();
